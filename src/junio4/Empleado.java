@@ -19,7 +19,7 @@ public abstract class Empleado implements Serializable {
         this.nombre = nombre;
     }
 
-    public abstract void asignarProyecto(Proyecto proyecto);
+    public abstract void asignarProyecto(Proyecto proyecto) throws NoLiderException;
     public abstract double getSalarioDiario();
     public abstract List<Proyecto> getProyectos();
 

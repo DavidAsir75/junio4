@@ -14,19 +14,19 @@ public class Programador extends Empleado implements EsLider {
     }
 
     public Programador(int id, String nombre, double salarioDiario, boolean esLider) {
-        super(id, nombre);
+        super();
         this.salarioDiario = salarioDiario;
         this.esLider = esLider;
         this.proyectos = new ArrayList<>();
     }
 
     @Override
-    public void asignarProyecto(Proyecto proyecto) {
+    public void asignarProyecto(Proyecto proyecto) throws NoLiderException {
         if ((esLider && proyectos.size() < 10) || (!esLider && proyectos.size() == 0)) {
             proyectos.add(proyecto);
             proyecto.agregarEmpleado(this);
         } else {
-            System.out.println("Error: Este programador ya tiene el máximo de proyectos asignados o no es líder.");
+            throw new NoLiderException();
         }
     }
 
