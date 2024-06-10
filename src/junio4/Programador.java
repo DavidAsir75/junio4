@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Programador extends Empleado implements EsLider {
-    private double salarioDiario;
+    private static final double SALARIO_DIARIO = 100.0;
     private boolean esLider;
     private List<Proyecto> proyectos;
 
@@ -13,31 +13,34 @@ public class Programador extends Empleado implements EsLider {
         this.proyectos = new ArrayList<>();
     }
 
-    public Programador(int id, String nombre, double salarioDiario, boolean esLider) {
-        super();
-        this.salarioDiario = salarioDiario;
+    public Programador(String nombre, boolean esLider) {
+        super(nombre);
         this.esLider = esLider;
         this.proyectos = new ArrayList<>();
     }
 
     @Override
-    public void asignarProyecto(Proyecto proyecto) throws ProyectoExcepcion {
-        if ((esLider && proyectos.size() < 10) || (!esLider && proyectos.size() == 0)) {
-            proyectos.add(proyecto);
-            proyecto.agregarEmpleado(this);
-        } else {
-            throw new ProyectoExcepcion();
+    public boolean isLider() {
+        return esLider;
+    }
+
+    @Override
+    public void asignarProyecto(Proyecto proyecto) throws ProyectoExcepcion.DemasiadosProyectos, ProyectoExcepcion.NoLider {
+        if (esLider && proyectos.size() >= 10) {
+            throw new ProyectoExcepcion.NoLider("Un líder no puede estar en más de 10 proyectos simultáneamente.");
+        } else if (!esLider && proyectos.size() >= Jefe.MAX_PROYECTOS) {
+            throw new ProyectoExcepcion.DemasiadosProyectos("Un programador no puede estar en más de " + Jefe.MAX_PROYECTOS + " proyectos simultáneamente.");
         }
+        proyectos.add(proyecto);
     }
 
     @Override
     public double getSalarioDiario() {
-        return esLider ? salarioDiario * 1.25 : salarioDiario;  // Plus del 25% si es líder
-    }
-
-    @Override
-    public boolean isLider() {
-        return esLider;
+        if (esLider) {
+            return SALARIO_DIARIO + SALARIO_DIARIO * 0.25;
+        } else {
+            return SALARIO_DIARIO;
+        }
     }
 
     @Override

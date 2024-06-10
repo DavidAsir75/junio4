@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import java.io.Serializable;
+import java.util.List;
+
 public abstract class Empleado implements Serializable {
     private static int idCounter = 0;
     private int id;
@@ -19,7 +22,7 @@ public abstract class Empleado implements Serializable {
         this.nombre = nombre;
     }
 
-    public abstract void asignarProyecto(Proyecto proyecto) throws ProyectoExcepcion;
+    public abstract void asignarProyecto(Proyecto proyecto) throws ProyectoExcepcion.DemasiadosProyectos, ProyectoExcepcion.NoLider;
     public abstract double getSalarioDiario();
     public abstract List<Proyecto> getProyectos();
 

@@ -86,9 +86,9 @@ public class Proyecto implements Serializable, Comparable<Proyecto> {
         return fechas;
     }
 
-    public void setFechaFin(String fechaFin, Programador lider) throws ParseException, ProyectoExcepcion {
+    public void setFechaFin(String fechaFin, Programador lider) throws ParseException, ProyectoExcepcion.NoLider {
         if (this.lider == null || !this.lider.equals(lider)) {
-            throw new ProyectoExcepcion("Solo el líder de programación puede establecer la fecha de finalización.");
+            throw new ProyectoExcepcion.NoLider("Solo el líder de programación puede establecer la fecha de finalización.");
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         this.fechas.setFechaFin(fechaFin);
