@@ -33,14 +33,21 @@ public abstract class Empleado implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Empleado empleado = (Empleado) o;
-        return id == empleado.id;
+        if (o != null && o instanceof Empleado) {
+            return id == ((Empleado) o).id;
+        }
+        return false;
+    }
+
+    public boolean equals(Empleado e) {
+        if (e != null) {
+            return id == e.id;
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return id;
     }
 }
