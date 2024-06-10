@@ -21,12 +21,12 @@ public class Programador extends Empleado implements EsLider {
     }
 
     @Override
-    public void asignarProyecto(Proyecto proyecto) throws NoLiderException {
+    public void asignarProyecto(Proyecto proyecto) throws ProyectoExcepcion {
         if ((esLider && proyectos.size() < 10) || (!esLider && proyectos.size() == 0)) {
             proyectos.add(proyecto);
             proyecto.agregarEmpleado(this);
         } else {
-            throw new NoLiderException();
+            throw new ProyectoExcepcion();
         }
     }
 

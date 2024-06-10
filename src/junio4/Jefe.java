@@ -24,12 +24,12 @@ public class Jefe extends Empleado {
     }
 
     @Override
-    public void asignarProyecto(Proyecto proyecto) throws NoLiderException {
+    public void asignarProyecto(Proyecto proyecto) throws ProyectoExcepcion {
         if (proyectos.size() < MAX_PROYECTOS) {
             proyectos.add(proyecto);
             proyecto.agregarEmpleado(this);
         } else {
-            throw new NoLiderException("Error: Este jefe ya tiene 3 proyectos asignados.");
+            throw new ProyectoExcepcion("Error: Este jefe ya tiene 3 proyectos asignados.");
         }
     }
 
