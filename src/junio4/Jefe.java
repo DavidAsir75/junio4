@@ -3,6 +3,9 @@ package junio4;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Jefe extends Empleado {
     private static final int MIN_PROYECTOS = 1;
     public static final int MAX_PROYECTOS = 3;
@@ -21,15 +24,12 @@ public class Jefe extends Empleado {
     }
 
     @Override
-    public void asignarProyecto(Proyecto proyecto) {
-        if (proyectos.size() >= MIN_PROYECTOS && proyectos.size() < MAX_PROYECTOS) {
-            proyectos.add(proyecto);
-            proyecto.agregarEmpleado(this);
-        } else if (proyectos.size() < MIN_PROYECTOS) {
+    public void asignarProyecto(Proyecto proyecto) throws NoLiderException {
+        if (proyectos.size() < MAX_PROYECTOS) {
             proyectos.add(proyecto);
             proyecto.agregarEmpleado(this);
         } else {
-            throw new IllegalArgumentException("Error: Este jefe ya tiene 3 proyectos asignados.");
+            throw new NoLiderException("Error: Este jefe ya tiene 3 proyectos asignados.");
         }
     }
 
