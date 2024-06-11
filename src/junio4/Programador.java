@@ -54,6 +54,7 @@ public class Programador extends Empleado implements EsLider {
 
     @Override
     public String toString() {
-        return "Programador: " + getNombre() + (esLider ? " (Líder)" : "") + ", Salario Diario: " + getSalarioDiario() + ", Proyectos Asignados: " + proyectos.size();
+        return super.toString() + "\tProgramador" + (esLider ? " (Líder)" : "") + ", Salario Diario: " + getSalarioDiario() + ", Proyectos Asignados: " + proyectos.size();
     }
 }
+

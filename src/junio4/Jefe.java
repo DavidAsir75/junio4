@@ -46,6 +46,6 @@ public class Jefe extends Empleado {
 
     @Override
     public String toString() {
-        return "Jefe: " + getNombre() + ", Salario Diario: " + getSalarioDiario() + ", Proyectos Asignados: " + proyectos.size();
+        return super.toString() + "\tJefe, Salario Diario: " + getSalarioDiario() + ", Proyectos Asignados: " + proyectos.size();
     }
 }
