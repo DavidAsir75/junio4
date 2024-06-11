@@ -45,16 +45,16 @@ public class Util {
         boolean liderAsignado = false;
 
         for (Empleado empleado : empleados) {
-            if (empleado instanceof Jefe && !jefeAsignado) {
+            if (empleado instanceof Jefe && !jefeAsignado && empleado.getProyectos().size() < Jefe.MAX_PROYECTOS) {
                 empleado.asignarProyecto(proyecto);
                 jefeAsignado = true;
-            } else if (empleado instanceof Programador) {
+            } else if (empleado instanceof Programador && programadoresAsignados < numProgramadores) {
                 Programador programador = (Programador) empleado;
-                if (programador.isLider() && !liderAsignado) {
+                if (programador.isLider() && !liderAsignado && programador.getProyectos().size() < Programador.MAX_PROYECTOS) {
                     programador.asignarProyecto(proyecto);
                     liderAsignado = true;
                     programadoresAsignados++;
-                } else if (!programador.isLider() && programadoresAsignados < numProgramadores) {
+                } else if (!programador.isLider() && programador.getProyectos().size() < Programador.MAX_PROYECTOS) {
                     programador.asignarProyecto(proyecto);
                     programadoresAsignados++;
                 }
@@ -63,6 +63,14 @@ public class Util {
             if (jefeAsignado && programadoresAsignados >= numProgramadores) {
                 break;
             }
+        }
+
+        if (!jefeAsignado) {
+            throw new ProyectoExcepcion.DemasiadosProyectos("Error: No se pudo asignar un jefe al proyecto.");
+        }
+
+        if (programadoresAsignados < Programador.MIN_PROGRAMADORES) {
+            throw new ProyectoExcepcion.DemasiadosProyectos("Error: No se pudieron asignar suficientes programadores al proyecto.");
         }
     }
 

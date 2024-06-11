@@ -8,6 +8,7 @@ public class Programador extends Empleado implements EsLider {
     private static final double SALARIO_DIARIO = 100.0;
     public static final int MIN_PROGRAMADORES = 5;
     public static final int MAX_PROGRAMADORES = 15;
+	public static final int MAX_PROYECTOS = 5;
     private boolean esLider;
     private List<Proyecto> proyectos;
 
