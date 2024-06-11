@@ -4,13 +4,10 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 
-import java.text.ParseException;
-import java.util.List;
-import java.util.Scanner;
-
 public class Menu {
     Scanner teclado;
     Gestor gestor;
+    List<Empleado> empleados; // Lista de empleados persistente
 
     public Menu() {
         teclado = new Scanner(System.in);
@@ -25,7 +22,8 @@ public class Menu {
         } else {
             // Si no hay proyectos leídos del archivo, inicializamos con nuevos datos
             try {
-                Util.inicializar(gestor);
+                empleados = Util.generarEmpleados();
+                Util.generarProyectos(gestor);
             } catch (ParseException | ProyectoExcepcion.DemasiadosProyectos | ProyectoExcepcion.NoLider e) {
                 e.printStackTrace();
             }
@@ -100,7 +98,7 @@ public class Menu {
         Proyecto proyecto = new Proyecto(gestor.getListaProyectos().size() + 1, "", new Fecha("1970-01-01"), 30, 5000.0);
         solicitaDatosProyecto(proyecto);
         try {
-            Util.asignarEmpleadosAlProyecto(proyecto, Util.generarEmpleados());
+            Util.asignarEmpleadosAlProyecto(proyecto, empleados);
         } catch (ProyectoExcepcion.DemasiadosProyectos | ProyectoExcepcion.NoLider e) {
             e.printStackTrace();
         }

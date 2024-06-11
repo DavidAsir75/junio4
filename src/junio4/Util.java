@@ -1,4 +1,5 @@
 package junio4;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +9,11 @@ public class Util {
 
     private static final int NUM_EMPLEADOS = 500;
     private static final int NUM_PROYECTOS = 100;
-
     private static final Random RANDOM = new Random();
+    private static List<Empleado> empleados; // Lista de empleados persistente
 
     public static List<Empleado> generarEmpleados() {
-        List<Empleado> empleados = new ArrayList<>();
+        empleados = new ArrayList<>();
         for (int i = 0; i < NUM_EMPLEADOS; i++) {
             String nombre = "Empleado" + (i + 1);
             if (RANDOM.nextBoolean()) {
@@ -25,7 +26,7 @@ public class Util {
         return empleados;
     }
 
-    public static List<Proyecto> generarProyectos(Gestor gestor, List<Empleado> empleados) throws ParseException, ProyectoExcepcion.DemasiadosProyectos, ProyectoExcepcion.NoLider {
+    public static List<Proyecto> generarProyectos(Gestor gestor) throws ParseException, ProyectoExcepcion.DemasiadosProyectos, ProyectoExcepcion.NoLider {
         List<Proyecto> proyectos = new ArrayList<>();
         for (int i = 0; i < NUM_PROYECTOS; i++) {
             String nombreProyecto = "Proyecto" + (i + 1);
@@ -37,7 +38,7 @@ public class Util {
         return proyectos;
     }
 
-    static void asignarEmpleadosAlProyecto(Proyecto proyecto, List<Empleado> empleados) throws ProyectoExcepcion.DemasiadosProyectos, ProyectoExcepcion.NoLider {
+    public static void asignarEmpleadosAlProyecto(Proyecto proyecto, List<Empleado> empleados) throws ProyectoExcepcion.DemasiadosProyectos, ProyectoExcepcion.NoLider {
         int numProgramadores = RANDOM.nextInt((Programador.MAX_PROGRAMADORES - Programador.MIN_PROGRAMADORES) + 1) + Programador.MIN_PROGRAMADORES;
         int programadoresAsignados = 0;
         boolean jefeAsignado = false;
@@ -66,7 +67,7 @@ public class Util {
     }
 
     public static void inicializar(Gestor gestor) throws ParseException, ProyectoExcepcion.DemasiadosProyectos, ProyectoExcepcion.NoLider {
-        List<Empleado> empleados = generarEmpleados();
-        generarProyectos(gestor, empleados);
+        generarEmpleados();
+        generarProyectos(gestor);
     }
 }
