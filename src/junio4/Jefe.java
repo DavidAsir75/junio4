@@ -5,18 +5,22 @@ import java.util.List;
 
 public class Jefe extends Empleado {
     public static final int MAX_PROYECTOS = 3;
-    private double salarioDiario;
+    private double salarioDiario = 150.0;
     private List<Proyecto> proyectos;
 
     public Jefe() {
         super();
         this.proyectos = new ArrayList<>();
-        this.salarioDiario = 150.0;
     }
 
     public Jefe(String nombre) {
         super(nombre);
-        this.salarioDiario = 150.0;
+        this.proyectos = new ArrayList<>();
+    }
+
+    public Jefe(String nombre, double salarioDiario) {
+        super(nombre);
+        this.salarioDiario = salarioDiario;
         this.proyectos = new ArrayList<>();
     }
 

@@ -1,3 +1,4 @@
+
 package junio4;
 
 import java.util.ArrayList;
@@ -5,8 +6,8 @@ import java.util.List;
 
 public class Programador extends Empleado implements EsLider {
     private static final double SALARIO_DIARIO = 100.0;
-	public static final int MIN_PROGRAMADORES = 5;
-	public static final int MAX_PROGRAMADORES = 15;
+    public static final int MIN_PROGRAMADORES = 5;
+    public static final int MAX_PROGRAMADORES = 15;
     private boolean esLider;
     private List<Proyecto> proyectos;
 
@@ -30,8 +31,8 @@ public class Programador extends Empleado implements EsLider {
     public void asignarProyecto(Proyecto proyecto) throws ProyectoExcepcion.DemasiadosProyectos, ProyectoExcepcion.NoLider {
         if (esLider && proyectos.size() >= 10) {
             throw new ProyectoExcepcion.NoLider("Un líder no puede estar en más de 10 proyectos simultáneamente.");
-        } else if (!esLider && proyectos.size() >= Jefe.MAX_PROYECTOS) {
-            throw new ProyectoExcepcion.DemasiadosProyectos("Un programador no puede estar en más de " + Jefe.MAX_PROYECTOS + " proyectos simultáneamente.");
+        } else if (!esLider && proyectos.size() >= Programador.MAX_PROGRAMADORES) {
+            throw new ProyectoExcepcion.DemasiadosProyectos("Un programador no puede estar en más de " + Programador.MAX_PROGRAMADORES + " proyectos simultáneamente.");
         }
         proyectos.add(proyecto);
     }
@@ -39,7 +40,7 @@ public class Programador extends Empleado implements EsLider {
     @Override
     public double getSalarioDiario() {
         if (esLider) {
-            return SALARIO_DIARIO + SALARIO_DIARIO * 0.25;
+            return SALARIO_DIARIO + SALARIO_DIARIO * 0.25; // 25% extra para líderes
         } else {
             return SALARIO_DIARIO;
         }
@@ -48,5 +49,10 @@ public class Programador extends Empleado implements EsLider {
     @Override
     public List<Proyecto> getProyectos() {
         return proyectos;
+    }
+
+    @Override
+    public String toString() {
+        return "Programador: " + getNombre() + (esLider ? " (Líder)" : "") + ", Salario Diario: " + getSalarioDiario() + ", Proyectos Asignados: " + proyectos.size();
     }
 }
