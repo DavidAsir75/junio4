@@ -1,10 +1,11 @@
 
 package junio4;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Programador extends Empleado implements EsLider {
+public class Programador extends Empleado{
     private static final double SALARIO_DIARIO = 100.0;
     public static final int MIN_PROGRAMADORES = 5;
     public static final int MAX_PROGRAMADORES = 15;

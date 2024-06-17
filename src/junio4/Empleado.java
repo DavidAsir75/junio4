@@ -53,4 +53,9 @@ public abstract class Empleado implements Serializable {
     public int hashCode() {
         return id;
     }
+
+	public boolean isLider() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
